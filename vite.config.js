@@ -12,6 +12,9 @@ export default defineConfig({
 	},
 	lint: {
 		extends: [oxlint],
+		options: {
+			typeAware: false,
+		},
 	},
 	staged: {
 		"*": "vp check --no-error-on-unmatched-pattern",
