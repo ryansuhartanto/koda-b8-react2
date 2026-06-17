@@ -11,7 +11,7 @@ function Search({ value, setValue, onSubmit, onSelect, suggestions = [] }) {
 	const [open, setOpen] = useState(false);
 
 	const filtered = value
-		? suggestions.filter((name) =>
+		? suggestions.filter(({ name }) =>
 				name.toLowerCase().includes(value.toLowerCase()),
 			)
 		: [];
@@ -46,9 +46,9 @@ function Search({ value, setValue, onSubmit, onSelect, suggestions = [] }) {
 			</form>
 			{open && filtered.length > 0 && (
 				<ul className="absolute z-10 top-full mt-2 w-full max-h-64 overflow-y-auto bg-white rounded-2xl shadow-xl py-2">
-					{filtered.map((name) => (
+					{filtered.map(({ id, name }) => (
 						<li
-							key={name}
+							key={id}
 							className="px-8 py-3 hover:bg-gray-100 cursor-pointer transition-colors"
 							onMouseDown={(e) => e.preventDefault()}
 							onClick={() => {
@@ -92,7 +92,7 @@ export default function App() {
 				<Search
 					value={search}
 					setValue={setSearch}
-					suggestions={data.results.map((c) => c.name)}
+					suggestions={data.results.map(({ id, name }) => ({ id, name }))}
 					onSelect={applySearch}
 					onSubmit={(e) => {
 						e.preventDefault();
