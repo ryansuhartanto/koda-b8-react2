@@ -12,6 +12,7 @@ function Card({ name, image }) {
 			<img
 				src={image}
 				alt={name}
+				loading="lazy"
 				className="object-cover"
 			/>
 			<div className="p-4 text-xl font-bold text-center">{name}</div>
