@@ -21,7 +21,7 @@ function Search({ value, setValue }) {
 	);
 }
 
-export function App() {
+export default function App() {
 	const [search, setSearch] = useState("");
 
 	return (
