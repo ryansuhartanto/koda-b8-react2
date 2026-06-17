@@ -8,6 +8,9 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		Component: App,
+		children: [
+			{ index: true, Component: React.lazy(() => import("#/Characters")) },
+		],
 	},
 ]);
 

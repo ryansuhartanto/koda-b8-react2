@@ -1,11 +1,9 @@
 import { SearchIcon } from "lucide-react";
 import React from "react";
-import { useSearchParams } from "react-router";
+import { Outlet, useSearchParams } from "react-router";
 
 // oxlint-disable-next-line no-unassigned-import
 import "./style.css";
-
-const Characters = React.lazy(() => import("./Characters"));
 
 function Search({ value, setValue }) {
 	return (
@@ -35,7 +33,7 @@ export default function App() {
 			</header>
 			<main className="max-w-3xl p-4 mx-auto">
 				<React.Suspense fallback={<>Loading...</>}>
-					<Characters />
+					<Outlet />
 				</React.Suspense>
 			</main>
 		</>
