@@ -1,5 +1,6 @@
 import { SearchIcon } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
+import { useSearchParams } from "react-router";
 
 // oxlint-disable-next-line no-unassigned-import
 import "./style.css";
@@ -22,25 +23,19 @@ function Search({ value, setValue }) {
 }
 
 export default function App() {
-	const [search, setSearch] = useState("");
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	return (
 		<>
 			<header className="sticky inset-bs-0 max-w-3xl p-4 mx-auto py-8 before:content-[''] before:fixed before:inset-0 before:inset-be-0 before:h-16 before:bg-white before:-z-10">
 				<Search
-					value={search}
-					setValue={setSearch}
+					value={searchParams.get("q")}
+					setValue={(value) => setSearchParams({ q: value })}
 				/>
 			</header>
 			<main className="max-w-3xl p-4 mx-auto">
 				<React.Suspense fallback={<>Loading...</>}>
-					<Characters
-						filterFn={(results) =>
-							results.filter(({ name }) =>
-								name.toLowerCase().includes(search.toLowerCase()),
-							)
-						}
-					/>
+					<Characters />
 				</React.Suspense>
 			</main>
 		</>

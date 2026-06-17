@@ -1,4 +1,5 @@
 import React from "react";
+import { useSearchParams } from "react-router";
 
 /**
  * @param {{ name: string, image: string }} props
@@ -19,15 +20,16 @@ function Card({ name, image }) {
 const req = await fetch("https://rickandmortyapi.com/api/character");
 const data = await req.json();
 
-/**
- * @param {{ filterFn: (Array) => Array }} props
- */
-export default function Characters({ filterFn = (a) => a }) {
-	const [display, setDisplay] = React.useState([]);
+export default function Characters() {
+	const [searchParams] = useSearchParams();
+	const query = searchParams.get("q");
 
-	React.useEffect(() => {
-		setDisplay(filterFn(data.results));
-	}, [filterFn]);
+	let display = data.results;
+	if (query) {
+		display = display.filter(({ name }) =>
+			name.toLowerCase().includes(query.toLowerCase()),
+		);
+	}
 
 	return (
 		<div className="grid grid-cols-2 gap-6">
