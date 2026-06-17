@@ -1,6 +1,8 @@
 import React from "react";
 import { useSearchParams } from "react-router";
 
+import { data } from "#/api";
+
 /**
  * @param {{ name: string, image: string }} props
  */
@@ -16,9 +18,6 @@ function Card({ name, image }) {
 		</div>
 	);
 }
-
-const req = await fetch("https://rickandmortyapi.com/api/character");
-const data = await req.json();
 
 export default function Characters() {
 	const [searchParams] = useSearchParams();
