@@ -31,14 +31,21 @@ export default function Characters() {
 	}
 
 	return (
-		<div className="grid grid-cols-2 gap-6">
-			{display.map(({ id, name, image }) => (
-				<Card
-					key={id}
-					name={name}
-					image={image}
-				/>
-			))}
-		</div>
+		<>
+			{query && (
+				<div className="mbe-4">
+					Found <span className="font-bold">{display.length} results</span>.
+				</div>
+			)}
+			<div className="grid grid-cols-2 gap-6">
+				{display.map(({ id, name, image }) => (
+					<Card
+						key={id}
+						name={name}
+						image={image}
+					/>
+				))}
+			</div>
+		</>
 	);
 }
