@@ -47,11 +47,12 @@ export default function App() {
 						e.preventDefault();
 						const form = new FormData(e.target);
 						const data = Object.fromEntries(form);
-						console.log(data);
+						data["q"] = data["q"]?.trim();
+						if (!data["q"]) {
+							delete data["q"];
+						}
 
-						setSearchParams({
-							q: data["q"].trim(),
-						});
+						setSearchParams(data);
 					}}
 				/>
 			</header>
